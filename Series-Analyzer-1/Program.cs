@@ -85,8 +85,7 @@ namespace Series_Analyzer_1
                         printList(numbers);
                         break;
                     case 3:
-
-
+                        printListReversed(numbers);
                         break;
                     case 4:
 
@@ -126,7 +125,10 @@ namespace Series_Analyzer_1
 
         static void printListReversed(List<int> numbers)
         {
-            
+            for (int i = numbers.Count;i >-1; i--)
+            {
+                Console.WriteLine(numbers[i]);
+            }
         }
 
         /// ////////      //////////////         //////////////////             ///////////              //////////
