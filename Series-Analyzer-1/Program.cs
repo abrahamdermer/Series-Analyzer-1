@@ -69,7 +69,7 @@ namespace Series_Analyzer_1
 
         static List<int> numbersReception()
         {
-            List<int> numbers = new List<int>();
+            List<int> _numbers = new List<int>();
             Console.WriteLine("Enter number or 'X' to exit");
             string input = Console.ReadLine();
             while (input != "x" && input != "X")
@@ -77,17 +77,18 @@ namespace Series_Analyzer_1
                 int newNum;
                 if (int.TryParse(input, out newNum) && newNum > 0)
                 {
-                    numbers.Add(newNum);
+                    _numbers.Add(newNum);
                 }
+                Console.WriteLine("Enter number or 'X' to exit");
+                input = Console.ReadLine();
             }
 
-            return numbers;
+            return _numbers;
 
         }
 
-        static void activeFan(string input , List<int> numbers )
+        static void activeFan(string input ,ref List<int> numbers )
         {
-
             int choich ;
 
             if ((int.TryParse(input,out choich)) && choich < 10 && choich > 0)
@@ -156,20 +157,21 @@ namespace Series_Analyzer_1
 
         static void printListReversed(List<int> numbers)
         {
-            for (int i = numbers.Count;i >-1; i--)
+            for (int i = numbers.Count;i >0; i--)
             {
-                Console.WriteLine(numbers[i]);
+                Console.Write(numbers[i-1] + " ");
             }
+            Console.WriteLine("");
         }
 
         /// ////////      //////////////         //////////////////             ///////////              //////////
         static void Main(string[] args)
         {
-            List<int> numbers = arryToList(args);      
+            List<int> numbersArr = arryToList(args);      
 
-            while(!testLenLIst(numbers))
+            while(!testLenLIst(numbersArr))
             {
-                numbers = numbersReception();
+                numbersArr = numbersReception();
             }
 
             string input ;
@@ -178,7 +180,7 @@ namespace Series_Analyzer_1
                 printMenu();
 
                 input = Console.ReadLine();
-                activeFan(input,numbers);
+                activeFan(input,ref  numbersArr);
 
             } while (input != "10");
 
