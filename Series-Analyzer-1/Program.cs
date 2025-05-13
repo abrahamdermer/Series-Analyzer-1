@@ -65,8 +65,6 @@ namespace Series_Analyzer_1
             }
             return (len > 2);
         }
-
-
         static List<int> numbersReception()
         {
             List<int> _numbers = new List<int>();
@@ -86,7 +84,26 @@ namespace Series_Analyzer_1
             return _numbers;
 
         }
+        static double findAverage(List<int> _numbers)
+        {
+            return sumList(_numbers)/(double)lenOfList(_numbers);
+        }
 
+        static int sumList(List<int> _numbers)
+        {
+            int sum = 0;
+            foreach (int num in _numbers)
+                sum += num;
+            return sum;
+        }
+
+        static int lenOfList(List<int> _list)
+        {
+            int len = 0;
+            foreach (int num in _list)
+                len += 1;
+            return len;
+        }
         static void activeFan(string input ,ref List<int> numbers )
         {
             int choich ;
@@ -118,13 +135,13 @@ namespace Series_Analyzer_1
                         printMin(numbers);
                         break;
                     case 7:
-
+                        printAverage(numbers);
                         break;
                     case 8:
-
+                        printLen(numbers);
                         break;
                     case 9:
-
+                        printSum(numbers);
                         break;
                 }
             }
@@ -149,6 +166,18 @@ namespace Series_Analyzer_1
             Console.WriteLine(findMin(_numbers));
         }
 
+        static void printAverage(List<int> _numbers)
+        {
+            Console.WriteLine(findAverage(_numbers));
+        }
+        static void printSum(List<int> _numbers)
+        {
+            Console.WriteLine(sumList(_numbers));
+        }
+        static void printLen(List<int> _numbers)
+        {
+            Console.WriteLine(lenOfList(_numbers));
+        }
 
         static void printMenu()
         {
