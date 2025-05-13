@@ -43,12 +43,21 @@ namespace Series_Analyzer_1
         }
         static int findMin(List<int> _numbers)
         {
-            int min = _numbers[0];
-            foreach (int num in _numbers)
+            int min;
+            if (lenOfList(_numbers) > 0)
             {
-                if (min > num)
-                    min = num;
+                min = _numbers[0];
+                if (lenOfList(_numbers) > 1)
+                {
+                    foreach (int num in _numbers)
+                    {
+                        if (min > num)
+                            min = num;
+                    }
+                }
             }
+                
+            
             return min;
         }
         static List<int> arryToList( string[] sriList)
@@ -67,13 +76,7 @@ namespace Series_Analyzer_1
         }
         static bool testLenLIst(List<int> lis)
         {
-            
-            int len = 0;
-            foreach (int i in lis)
-            {
-                len += 1;
-            }
-            return (len > 2);
+            return (lenOfList(lis) > 2);
         }
         static List<int> numbersReception()
         {
@@ -94,9 +97,9 @@ namespace Series_Analyzer_1
             return _numbers;
 
         }
-        static double findAverage(List<int> _numbers)
+        static int findAverage(List<int> _numbers)
         {
-            return sumList(_numbers)/(double)lenOfList(_numbers);
+            return sumList(_numbers)/lenOfList(_numbers);
         }
 
         static int sumList(List<int> _numbers)
@@ -139,22 +142,28 @@ namespace Series_Analyzer_1
                         printsorted(numbers);
                         break;
                     case 5:
-                        printMax(numbers);
+                        printer( findMax, numbers);
                         break;
                     case 6:
-                        printMin(numbers);
+                        printer(findMax , numbers);
                         break;
                     case 7:
-                        printAverage(numbers);
+                        printer(findAverage,numbers);
                         break;
                     case 8:
-                        printLen(numbers);
+                        printer(lenOfList, numbers);
                         break;
                     case 9:
-                        printSum(numbers);
+                        printer(sumList, numbers);
                         break;
                 }
             }
+        }
+
+
+        static void printer( Func <List<int> , int > func, List<int> _numbers )
+        {
+            Console.WriteLine(func(_numbers)); 
         }
 
         static void printList(List<int> numbers)
