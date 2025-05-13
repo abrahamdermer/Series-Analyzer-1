@@ -21,6 +21,26 @@ namespace Series_Analyzer_1
             return newList;
         }
 
+        static int findMax(List<int> _numbers)
+        {
+            int max = _numbers[0];
+            foreach(int num in _numbers)
+            {
+                if (max < num)
+                    max = num;
+            }
+            return max;
+        }
+        static int findMin(List<int> _numbers)
+        {
+            int min = _numbers[0];
+            foreach (int num in _numbers)
+            {
+                if (min > num)
+                    min = num;
+            }
+            return min;
+        }
         static List<int> arryToList( string[] sriList)
         {
             List<int> numbers = new List<int>();
@@ -91,10 +111,10 @@ namespace Series_Analyzer_1
 
                         break;
                     case 5:
-
+                        printMax(numbers);
                         break;
                     case 6:
-
+                        printMin(numbers);
                         break;
                     case 7:
 
@@ -117,6 +137,17 @@ namespace Series_Analyzer_1
             }
             Console.WriteLine();
         }
+
+        static void printMax(List<int> _numbers)
+        {
+            Console.WriteLine(findMax(_numbers));
+        }
+
+        static void printMin(List<int> _numbers)
+        {
+            Console.WriteLine(findMin(_numbers));
+        }
+
 
         static void printMenu()
         {
