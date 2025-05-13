@@ -9,41 +9,66 @@ namespace Series_Analyzer_1
 {
     internal class Program
     {
-        static List<int> copylist(List<int> _list)
+        static List<int> copyList(List<int> _list)
         {
-            List<int> newlist = new List<int>();
+            List<int> newList = new List<int>();
             foreach (int num in _list)
-                newlist.Add(num);
-            return newlist;
+                newList.Add(num);
+            return newList;
         }
 
-
-        static void printsorted(List<int> _numbers)
+        static List<int> arrayToList(string[] sriList)
         {
-            List<int> newlist = copylist(_numbers);
-            while (lenOfList(newlist) > 0)
+            List<int> numbers = new List<int>();
+            foreach (string sri in sriList)
             {
-                int min = findMin(newlist);
-                Console.Write(min+ " ");
-                newlist.Remove(min);                
+                int strInt;
+                if (int.TryParse(sri, out strInt) && strInt > 0)
+                {
+                    numbers.Add(strInt);
+                }
             }
-            Console.WriteLine("");
+            return numbers;
+        }
 
+        static bool validLenLIst(List<int> lis)
+        {
+            return (lenOfList(lis) > 2);
+        }
+
+        static List<int> numbersReception()
+        {
+            List<int> _numbers = new List<int>();
+            string input;
+            do
+            {
+                Console.WriteLine("Enter number, Or 'X' to exit");
+                input = Console.ReadLine();
+                int newNum;
+
+                if (int.TryParse(input, out newNum) && newNum > 0)
+                {
+                    _numbers.Add(newNum);
+                }
+                
+            } while (input != "x" && input != "X");
+            return _numbers;
         }
 
         static int findMax(List<int> _numbers)
         {
             int max = _numbers[0];
-            foreach(int num in _numbers)
+            foreach (int num in _numbers)
             {
                 if (max < num)
                     max = num;
             }
             return max;
         }
+
         static int findMin(List<int> _numbers)
         {
-            int min;
+            int min = -1;
             if (lenOfList(_numbers) > 0)
             {
                 min = _numbers[0];
@@ -56,47 +81,10 @@ namespace Series_Analyzer_1
                     }
                 }
             }
-                
-            
+
             return min;
         }
-        static List<int> arryToList( string[] sriList)
-        {
-            List<int> numbers = new List<int>();
-            foreach (string sri in sriList)
-            {
-                int strInt;
-                if (int.TryParse(sri, out strInt) && strInt > 0)
-                {
-                    numbers.Add(strInt);
-                }
-                    
-            }
-            return numbers;
-        }
-        static bool testLenLIst(List<int> lis)
-        {
-            return (lenOfList(lis) > 2);
-        }
-        static List<int> numbersReception()
-        {
-            List<int> _numbers = new List<int>();
-            Console.WriteLine("Enter number or 'X' to exit");
-            string input = Console.ReadLine();
-            while (input != "x" && input != "X")
-            {
-                int newNum;
-                if (int.TryParse(input, out newNum) && newNum > 0)
-                {
-                    _numbers.Add(newNum);
-                }
-                Console.WriteLine("Enter number or 'X' to exit");
-                input = Console.ReadLine();
-            }
 
-            return _numbers;
-
-        }
         static int findAverage(List<int> _numbers)
         {
             return sumList(_numbers)/lenOfList(_numbers);
@@ -117,6 +105,7 @@ namespace Series_Analyzer_1
                 len += 1;
             return len;
         }
+
         static void activeFan(string input ,ref List<int> numbers ) 
         {
             int choich ;
@@ -130,7 +119,7 @@ namespace Series_Analyzer_1
                         {
                             numbers = numbersReception();
                         }
-                        while (!testLenLIst(numbers));
+                        while (!validLenLIst(numbers));
                         break;
                     case 2:
                         printList(numbers);
@@ -139,7 +128,7 @@ namespace Series_Analyzer_1
                         printListReversed(numbers);
                         break;
                     case 4:
-                        printsorted(numbers);
+                        printSorted(numbers);
                         break;
                     case 5:
                         printer( findMax, numbers);
@@ -160,7 +149,6 @@ namespace Series_Analyzer_1
             }
         }
 
-
         static void printer( Func <List<int> , int > func, List<int> _numbers )
         {
             Console.WriteLine(func(_numbers)); 
@@ -175,32 +163,15 @@ namespace Series_Analyzer_1
             Console.WriteLine();
         }
 
-        static void printMax(List<int> _numbers)
-        {
-            Console.WriteLine(findMax(_numbers));
-        }
-
-        static void printMin(List<int> _numbers)
-        {
-            Console.WriteLine(findMin(_numbers));
-        }
-
-        static void printAverage(List<int> _numbers)
-        {
-            Console.WriteLine(findAverage(_numbers));
-        }
-        static void printSum(List<int> _numbers)
-        {
-            Console.WriteLine(sumList(_numbers));
-        }
-        static void printLen(List<int> _numbers)
-        {
-            Console.WriteLine(lenOfList(_numbers));
-        }
-
         static void printMenu()
         {
-            Console.WriteLine("1 to Input a Series. (Replace the current series)\r\n2 to Display the series in the order it was entered.\r\n3 to Display the series in the reversed order it was entered.\r\n4 to Display the series in sorted order (from low to high).\r\n5 to Display the Max value of the series.\r\n6 to Display the Min value of the series.\r\n7 to Display the Average of the series.\r\n8 to Display the Number of elements in the series.\r\n9 to Display the Sum of the series.\r\n10 to Exit.\r\n");
+            Console.WriteLine(" 1  to Input a Series. (Replace the current series)" +
+                "\n 2  to Display the series in the order it was entered." +
+                "\n 3  to Display the series in the reversed order it was entered." +
+                "\n 4  to Display the series in sorted order (from low to high)." +
+                "\n 5  to Display the Max value of the series.\n 6  to Display the Min value of the series." +
+                "\n 7  to Display the Average of the series.\n 8  to Display the Number of elements in the series." +
+                "\n 9  to Display the Sum of the series.\n 10 to Exit.\n");
         }
 
         static void printListReversed(List<int> numbers)
@@ -212,12 +183,29 @@ namespace Series_Analyzer_1
             Console.WriteLine("");
         }
 
-        /// ////////      //////////////         //////////////////             ///////////              //////////
+        static void printSorted(List<int> _numbers)
+        {
+            List<int> newList = copyList(_numbers);
+            while (lenOfList(newList) > 0)
+            {
+                int min = findMin(newList);
+                Console.Write(min + " ");
+                newList.Remove(min);
+            }
+            Console.WriteLine("");
+
+        }
+
+
+        //  **  \\\      |||\\      //|||       ///\\\       |||     |||\\  |||
+        //  **** \\\     |||\\\    ///|||      ///__\\\      |||     |||\\\ |||
+        //  **** ///     ||| \\\  /// |||     ///----\\\     |||     ||| \\\|||
+        //  **  ///      |||  \\\///  |||    ///      \\\    |||     |||  \\|||
         static void Main(string[] args)
         {
-            List<int> numbersArr = arryToList(args);      
+            List<int> numbersArr = arrayToList(args);      
 
-            while(!testLenLIst(numbersArr))
+            while(!validLenLIst(numbersArr))
             {
                 numbersArr = numbersReception();
             }
@@ -226,16 +214,11 @@ namespace Series_Analyzer_1
             do
             {
                 printMenu();
-
                 input = Console.ReadLine();
-                activeFan(input,ref  numbersArr);
+                Console.WriteLine();
+                activeFan(input,ref numbersArr);
 
             } while (input != "10");
-
-            
-
-
-
 
 
         }
