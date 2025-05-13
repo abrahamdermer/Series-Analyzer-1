@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,17 +9,26 @@ namespace Series_Analyzer_1
 {
     internal class Program
     {
-        static int[] listToArry(List<int> numbers)
+        static List<int> copylist(List<int> _list)
         {
-            int lenList = numbers.Count;
-            int[] newList = new int[lenList-1];
+            List<int> newlist = new List<int>();
+            foreach (int num in _list)
+                newlist.Add(num);
+            return newlist;
+        }
 
-            for (int i = 0;i< lenList; i++)
+
+        static void printsorted(List<int> _numbers)
+        {
+            List<int> newlist = copylist(_numbers);
+            while (lenOfList(newlist) > 0)
             {
-                newList[i] = numbers[lenList - i];
+                int min = findMin(newlist);
+                Console.Write(min+ " ");
+                newlist.Remove(min);                
             }
+            Console.WriteLine("");
 
-            return newList;
         }
 
         static int findMax(List<int> _numbers)
@@ -104,7 +114,7 @@ namespace Series_Analyzer_1
                 len += 1;
             return len;
         }
-        static void activeFan(string input ,ref List<int> numbers )
+        static void activeFan(string input ,ref List<int> numbers ) 
         {
             int choich ;
 
@@ -126,7 +136,7 @@ namespace Series_Analyzer_1
                         printListReversed(numbers);
                         break;
                     case 4:
-
+                        printsorted(numbers);
                         break;
                     case 5:
                         printMax(numbers);
